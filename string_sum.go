@@ -3,6 +3,7 @@ package string_sum
 import (
 	"errors"
 	"fmt"
+	"strconv"
 )
 
 //use these errors as appropriate, wrapping them with fmt.Errorf function
@@ -32,6 +33,21 @@ func StringSum(input string) (output string, err error) {
 	}
 	if len(input) < 2 {
 		err := fmt.Errorf("should be at least 2 signs: %w", errorEmptyInput)
+		//fmt.Println(input, err.Error())
+		return "", err
+	}
+	if len(input) >= 2 {
+		var sum int
+		for _, x := range input {
+
+			xstr := string(x) //x is rune converted to string
+			xint, _ := strconv.Atoi(xstr)
+			sum += xint
+
+		}
+		output := strconv.Itoa(sum)
+		fmt.Printf("%s", output)
+		err := fmt.Errorf("sum is not success: %w", errorEmptyInput)
 		//fmt.Println(input, err.Error())
 		return "", err
 	}
