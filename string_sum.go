@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 //use these errors as appropriate, wrapping them with fmt.Errorf function
@@ -28,7 +29,7 @@ var (
 func StringSum(input string) (output string, err error) {
 	if len(input) == 0 || input == "" || input == " " {
 		err := fmt.Errorf("input is empty: %w", errorEmptyInput)
-		//fmt.Println(input, err.Error())
+		//fmt.Println(err.Error())
 		return "", err
 	}
 	//if len(input) <= 2 {
@@ -36,27 +37,39 @@ func StringSum(input string) (output string, err error) {
 	//fmt.Println(input, err.Error())
 	//	return "", err
 	//}
-	if len(input) == 0 || input == "" || input == " " {
-		err := fmt.Errorf("input is empty: %w", errorEmptyInput)
-		fmt.Println(input, err.Error())
-		//return "", err
-	}
-	if len(input) < 2 {
+
+	//sum
+	if len(input) == 1 {
 		err := fmt.Errorf("should be at least 2 signs: %w", errorNotTwoOperands)
-		fmt.Println(input, err.Error())
+		fmt.Println(nil, err.Error())
 	}
 
-	if len(input) >= 2 {
-		var sum int
+	sign := "+"
+	sign1 := "- -"
+	sign2 := "+ +"
+	signscheck1 := strings.Contains(input, sign1)
+	signcheck2 := strings.Contains(input, sign2)
+	signPlus := strings.Contains(input, sign)
 
-		for _, x := range input {
-			xstr := string(x) //x is rune converted to string
-			xint, _ := strconv.Atoi(xstr)
-			sum += xint
+	if signscheck1 == true || signcheck2 == true && signPlus == false {
+		//fmt.Println(input)
+		err := fmt.Errorf("input have signs: %w", errorEmptyInput)
+		fmt.Println(err.Error())
 
-		}
+	}
 
-		output := strconv.Itoa(sum)
+	//sum
+	//var sum int
+	if signPlus == true {
+		parts := strings.Split(input, "+")
+		part1 := parts[0]
+		part2 := parts[1]
+		sint1, _ := strconv.Atoi(part1)
+		sint2, _ := strconv.Atoi(part2)
+		sumint := sint1 + sint2
+		//fmt.Println(sumint)
+
+		output := strconv.Itoa(sumint)
 		//fmt.Printf("%s", output)
 		err := fmt.Errorf("sum is not correct: %w", errorNotTwoOperands)
 		if err == nil {
@@ -65,9 +78,7 @@ func StringSum(input string) (output string, err error) {
 		}
 
 		fmt.Println(output, nil)
-
 	}
-	return "", nil
 	//end
-	//	return "", nil
+	return output, nil
 }
