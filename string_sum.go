@@ -27,6 +27,7 @@ var (
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
 func StringSum(input string) (output string, err error) {
+
 	if len(input) == 0 || input == "" || input == " " {
 		err := fmt.Errorf("input is empty: %w", errorEmptyInput)
 		//fmt.Println(err.Error())
@@ -44,32 +45,29 @@ func StringSum(input string) (output string, err error) {
 		fmt.Println(nil, err.Error())
 	}
 
-	sign := "+"
-	sign1 := "- -"
-	sign2 := "+ +"
-	signscheck1 := strings.Contains(input, sign1)
-	signcheck2 := strings.Contains(input, sign2)
-	signPlus := strings.Contains(input, sign)
+	//signPlus := strings.Contains(input, sign)
+	Res1count := strings.Count(input, "+")
 
-	if signscheck1 == true || signcheck2 == true && signPlus == false {
+	if Res1count >= 2 {
 		//fmt.Println(input)
-		err := fmt.Errorf("input have signs: %w", errorEmptyInput)
+		err := fmt.Errorf("more than 2 argument:: %w", errorEmptyInput)
 		fmt.Println(err.Error())
 
 	}
 
 	//sum
 	//var sum int
-	if signPlus == true {
+	if Res1count < 2 {
 		parts := strings.Split(input, "+")
 		part1 := parts[0]
 		part2 := parts[1]
 		sint1, _ := strconv.Atoi(part1)
 		sint2, _ := strconv.Atoi(part2)
+		//sum
 		sumint := sint1 + sint2
 		//fmt.Println(sumint)
 
-		output := strconv.Itoa(sumint)
+		result := strconv.Itoa(sumint)
 		//fmt.Printf("%s", output)
 		err := fmt.Errorf("sum is not correct: %w", errorNotTwoOperands)
 		if err == nil {
@@ -77,8 +75,9 @@ func StringSum(input string) (output string, err error) {
 			fmt.Println(err.Error())
 		}
 
-		fmt.Println(output, nil)
+		fmt.Println(result, nil)
+
 	}
 	//end
-	return output, nil
+	return "", nil
 }
