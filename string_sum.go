@@ -39,11 +39,11 @@ func StringSum(input string) (output string, err error) {
 	//	return "", err
 	//}
 
-	//sum
-	if len(input) <= 1 {
-		err := fmt.Errorf("should be at least 2 signs: %w", errorNotTwoOperands)
-		fmt.Println(nil, err.Error())
-	}
+	//sum !!!
+	//if len(input) <= 1 {
+	//	err := fmt.Errorf("should be at least 2 signs: %w", errorNotTwoOperands)
+	//	fmt.Println(nil, err.Error())
+	//}
 
 	//signPlus := strings.Contains(input, sign)
 	signplus := "+"
@@ -68,7 +68,7 @@ func StringSum(input string) (output string, err error) {
 	}
 
 	//42
-	if signPlus1 == false && Res1count == 0 && len(input) < 3 {
+	if signPlus1 == false && Res1count == 0 && len(input) < 3 && len(input) > 1 {
 		err := fmt.Errorf("only 1 argument: %w", errorNotTwoOperands)
 		fmt.Println(nil, err.Error())
 
@@ -90,14 +90,14 @@ func StringSum(input string) (output string, err error) {
 			sumintm := min2m - min1m
 
 			Result3 := strconv.Itoa(sumintm)
-			fmt.Println("-" + Result3)
+			fmt.Println("-"+Result3, nil)
 
 		}
 		if min2m < min1m {
 			sumintm := min1m + min2m
 
 			Result3 := strconv.Itoa(sumintm)
-			fmt.Println("-" + Result3)
+			fmt.Println("-"+Result3, nil)
 
 		}
 
