@@ -30,37 +30,29 @@ func StringSum(input string) (output string, err error) {
 
 	if len(input) == 0 || input == "" || input == " " {
 		err := fmt.Errorf("input is empty: %w", errorEmptyInput)
-		//fmt.Println(err.Error())
-		return "", err
+		fmt.Println(err.Error())
+		//return "", err
 	}
-	//if len(input) <= 2 {
-	//	err := fmt.Errorf("should be at least 2 signs: %w", errorEmptyInput)
-	//fmt.Println(input, err.Error())
-	//	return "", err
-	//}
+	if len(input) == 1 {
+		err := fmt.Errorf("should be at least 2 signs: %w", errorNotTwoOperands)
+		fmt.Println(nil, err.Error())
+	}
 
-	//sum !!!
-	//if len(input) <= 1 {
-	//	err := fmt.Errorf("should be at least 2 signs: %w", errorNotTwoOperands)
-	//	fmt.Println(nil, err.Error())
-	//}
-
-	//signPlus := strings.Contains(input, sign)
 	signplus := "+"
 	signPlus1 := strings.Contains(input, signplus)
 	signminus := "-"
 	Signmm := strings.Contains(input, signminus)
-
-	//19.05
-	Res1count := strings.Count(input, "+")
-	Res2count := strings.Count(input, "-")
 	//20.05
 	Res1 := strings.Trim(input, " ")
 	Res1ch := strings.Contains(input, Res1)
 
+	//19.05
+	Res1count := strings.Count(input, "+")
+	Res2count := strings.Count(input, "-")
+
 	//c, f
-	charec1 := strings.Contains(input, "c")
-	charec2 := strings.Contains(input, "f")
+	charec1 := strings.Contains(Res1, "c")
+	charec2 := strings.Contains(Res1, "f")
 	if charec1 == true || charec2 == true {
 		err := fmt.Errorf("contain letter: %w", errorNotTwoOperands)
 		fmt.Println(nil, err.Error())
@@ -81,6 +73,7 @@ func StringSum(input string) (output string, err error) {
 	}
 
 	if Signmm == true && Res2count == 1 {
+
 		min := strings.Split(Res1, "-")
 		min1 := min[0]
 		min2 := min[1]
@@ -115,11 +108,12 @@ func StringSum(input string) (output string, err error) {
 	}
 
 	//two minus
+
 	if Signmm == true && Res2count < 3 && Res2count > 1 && Res1ch == true {
+
 		partsm := strings.Split(Res1, "-")
 		part1m := partsm[1]
 		part2m := partsm[2]
-		//20.05
 		space := strings.Trim(part1m, " ")
 		space2 := strings.Trim(part2m, " ")
 
@@ -168,6 +162,7 @@ func StringSum(input string) (output string, err error) {
 		fmt.Println(output, nil)
 		//retirn "", err
 	}
+
 	//end
 	return "", nil
 }
