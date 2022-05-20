@@ -54,6 +54,9 @@ func StringSum(input string) (output string, err error) {
 	//19.05
 	Res1count := strings.Count(input, "+")
 	Res2count := strings.Count(input, "-")
+	//20.05
+	Res1 := strings.Trim(input, " ")
+	Res1ch := strings.Contains(input, Res1)
 
 	//c, f
 	charec1 := strings.Contains(input, "c")
@@ -65,7 +68,7 @@ func StringSum(input string) (output string, err error) {
 	}
 
 	//42
-	if signPlus1 == false && Res1count == 0 {
+	if signPlus1 == false && Res1count == 0 && len(input) < 3 {
 		err := fmt.Errorf("only 1 argument: %w", errorNotTwoOperands)
 		fmt.Println(nil, err.Error())
 
@@ -78,7 +81,7 @@ func StringSum(input string) (output string, err error) {
 	}
 
 	if Signmm == true && Res2count == 1 {
-		min := strings.Split(input, "-")
+		min := strings.Split(Res1, "-")
 		min1 := min[0]
 		min2 := min[1]
 		min1m, _ := strconv.Atoi(min1)
@@ -112,13 +115,16 @@ func StringSum(input string) (output string, err error) {
 	}
 
 	//two minus
-	if Signmm == true && Res2count < 3 && Res2count > 1 {
-		partsm := strings.Split(input, "-")
+	if Signmm == true && Res2count < 3 && Res2count > 1 && Res1ch == true {
+		partsm := strings.Split(Res1, "-")
 		part1m := partsm[1]
 		part2m := partsm[2]
+		//20.05
+		space := strings.Trim(part1m, " ")
+		space2 := strings.Trim(part2m, " ")
 
-		sint1m, _ := strconv.Atoi(part1m)
-		sint2m, _ := strconv.Atoi(part2m)
+		sint1m, _ := strconv.Atoi(space)
+		sint2m, _ := strconv.Atoi(space2)
 		sumintm := sint1m + sint2m
 
 		outputm := strconv.Itoa(sumintm)
