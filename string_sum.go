@@ -39,6 +39,7 @@ func StringSum(input string) (output string, err error) {
 	//	return "", err
 	//}
 
+	//signPlus := strings.Contains(input, sign)
 	//sum
 	if len(input) == 1 {
 		err := fmt.Errorf("should be at least 2 signs: %w", errorNotTwoOperands)
@@ -151,6 +152,7 @@ func StringSum(input string) (output string, err error) {
 	if signPlus1 == true && Res1count >= 2 {
 		err := fmt.Errorf("more than 2 argument: %w", errorNotTwoOperands)
 		fmt.Println(nil, err.Error())
+		return "", err
 	}
 
 	if signPlus1 == true && Res1count < 2 && charec1 == false && charec2 == false {
@@ -170,6 +172,7 @@ func StringSum(input string) (output string, err error) {
 		if err == nil {
 
 			fmt.Println(err.Error())
+			return "", err
 		}
 
 		fmt.Println(output, nil)
