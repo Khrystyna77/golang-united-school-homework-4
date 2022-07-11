@@ -63,13 +63,32 @@ func StringSum(input string) (output string, err error) {
 	//c, f
 	charec1 := strings.Contains(input, "c")
 	charec2 := strings.Contains(input, "f")
+	whitesp := strings.Contains(input, " ")
+	//array1 := strings.Fields(input)
+	if charec2 == true {
+		replace := strings.ReplaceAll(input, "+", " ")
 
-	if charec1 == true || charec2 == true {
-		err := fmt.Errorf("contain letter: %w", errorNotTwoOperands)
+		array1 := strings.Fields(replace)
+		//fmt.Println(array1[1])
+
+		err := fmt.Errorf("exist error: %v", array1[1])
 		fmt.Println(err.Error())
 		return "", err
 
 	}
+	if charec1 == true {
+		replace := strings.ReplaceAll(input, "+", " ")
+
+		array1 := strings.Fields(replace)
+		//fmt.Println(array1[1])
+
+		err := fmt.Errorf("exist error: %v", array1[0])
+		fmt.Println(err.Error())
+		return "", err
+
+	}
+
+	//42
 
 	//42
 	if signPlus1 == false && Res1count == 0 && len(input) < 3 && len(input) > 1 {
@@ -122,7 +141,7 @@ func StringSum(input string) (output string, err error) {
 	}
 
 	//two minus
-	if Signmm == true && Res2count < 3 && Res2count > 1 && Res1ch == true {
+	if Signmm == true && Res2count < 2 && Res2count > 1 && Res1ch == true {
 		partsm := strings.Split(Res1, "-")
 		part1m := partsm[1]
 		part2m := partsm[2]
@@ -139,7 +158,6 @@ func StringSum(input string) (output string, err error) {
 		err := fmt.Errorf("sum is not correct: %w", errorNotTwoOperands)
 		if err == nil {
 
-			fmt.Println(err.Error())
 			return "", err
 		}
 
@@ -154,8 +172,37 @@ func StringSum(input string) (output string, err error) {
 		fmt.Println(nil, err.Error())
 		return "", err
 	}
+	//whitesp
+	if whitesp == true {
+		//input = string.ReplaceAll(input, " ", "")
+		newinput := strings.Fields(input)
 
-	if signPlus1 == true && Res1count < 2 && charec1 == false && charec2 == false {
+		one, oneer := strconv.Atoi(newinput[0])
+		if oneer != nil {
+			err := fmt.Errorf("wrong input, %w", errorNotTwoOperands)
+			fmt.Println(nil, err.Error())
+			return "", err
+		}
+
+		two, twoer := strconv.Atoi(newinput[1])
+		if twoer != nil {
+			err := fmt.Errorf("wrong input2, %w", errorNotTwoOperands)
+			fmt.Println(nil, err.Error())
+			fmt.Println(one, two)
+			return "", err
+		}
+
+		//for i := 0, i < len(newinput), i++ {
+		//       if newinput[i] == 0
+		//}
+		fmt.Println(one, two)
+		summaWhite := one + two
+		out := strconv.Itoa(summaWhite)
+		fmt.Println(out, nil)
+	}
+
+	if signPlus1 == true && Res1count < 2 {
+		//&& charec1 == false && charec2 == false
 
 		parts := strings.Split(input, "+")
 		part1 := parts[0]
