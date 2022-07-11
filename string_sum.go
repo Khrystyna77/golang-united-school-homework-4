@@ -58,13 +58,13 @@ func StringSum(input string) (output string, err error) {
 	Res2count := strings.Count(input, "-")
 	//20.05
 	Res1 := strings.Trim(input, " ")
-	Res1ch := strings.Contains(input, Res1)
+	//Res1ch := strings.Contains(input, Res1)
 
 	//c, f
 	charec1 := strings.Contains(input, "c")
 	charec2 := strings.Contains(input, "f")
-	whitesp := strings.Contains(input, " ")
 	//array1 := strings.Fields(input)
+	whitesp := strings.Contains(input, " ")
 	if charec2 == true {
 		replace := strings.ReplaceAll(input, "+", " ")
 
@@ -127,7 +127,7 @@ func StringSum(input string) (output string, err error) {
 		}
 
 		err := fmt.Errorf("sum minus is not correct: %w", errorNotTwoOperands)
-		if err == nil {
+		if err != nil {
 
 			fmt.Println(err.Error())
 			return "", err
@@ -141,10 +141,13 @@ func StringSum(input string) (output string, err error) {
 	}
 
 	//two minus
-	if Signmm == true && Res2count < 2 && Res2count > 1 && Res1ch == true {
+	if Signmm == true && Res2count < 2 {
+
+		// && Res2count > 1 && Res1ch == true
 		partsm := strings.Split(Res1, "-")
-		part1m := partsm[1]
-		part2m := partsm[2]
+		part1m := partsm[0]
+		part2m := partsm[1]
+
 		//20.05
 		space := strings.Trim(part1m, " ")
 		space2 := strings.Trim(part2m, " ")
@@ -160,9 +163,9 @@ func StringSum(input string) (output string, err error) {
 
 			return "", err
 		}
+		out := ("-" + outputm)
 
-		fmt.Println("-"+outputm, nil)
-		//retirn "", err
+		return out, nil
 
 	}
 
@@ -172,8 +175,34 @@ func StringSum(input string) (output string, err error) {
 		fmt.Println(nil, err.Error())
 		return "", err
 	}
-	//whitesp
-	if whitesp == true {
+	//++1107.2022
+	if Res1count == 1 {
+
+		parts := strings.Split(input, "+")
+		part1 := parts[0]
+		part2 := parts[1]
+
+		sint1, _ := strconv.Atoi(part1)
+		sint2, _ := strconv.Atoi(part2)
+		sumint := sint1 + sint2
+		//fmt.Println(sumint)
+
+		output := strconv.Itoa(sumint)
+		//fmt.Printf("%s", output)
+		err := fmt.Errorf("sum is not correct: %w", errorNotTwoOperands)
+		if err == nil {
+
+			fmt.Println(err.Error())
+			return "", err
+		}
+
+		fmt.Println(output, nil)
+		return output, nil
+
+	}
+	//wgitespace
+	if whitesp == true && Res2count == 2 {
+		//input = string.ReplaceAll(input, "-", "")
 		newinput := strings.Fields(input)
 
 		one, oneer := strconv.Atoi(newinput[0])
