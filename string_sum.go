@@ -174,17 +174,18 @@ func StringSum(input string) (output string, err error) {
 	}
 	//whitesp
 	if whitesp == true {
-		//input = string.ReplaceAll(input, " ", "")
 		newinput := strings.Fields(input)
 
 		one, oneer := strconv.Atoi(newinput[0])
+
 		if oneer != nil {
 			err := fmt.Errorf("wrong input, %w", errorNotTwoOperands)
 			fmt.Println(nil, err.Error())
 			return "", err
 		}
 
-		two, twoer := strconv.Atoi(newinput[1])
+		two, twoer := strconv.Atoi(newinput[2])
+
 		if twoer != nil {
 			err := fmt.Errorf("wrong input2, %w", errorNotTwoOperands)
 			fmt.Println(nil, err.Error())
@@ -195,10 +196,13 @@ func StringSum(input string) (output string, err error) {
 		//for i := 0, i < len(newinput), i++ {
 		//       if newinput[i] == 0
 		//}
-		fmt.Println(one, two)
+		two = -two
 		summaWhite := one + two
 		out := strconv.Itoa(summaWhite)
+
 		fmt.Println(out, nil)
+		return out, nil
+
 	}
 
 	if signPlus1 == true && Res1count < 2 {
