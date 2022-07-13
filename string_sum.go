@@ -71,9 +71,12 @@ func StringSum(input string) (output string, err error) {
 		array1 := strings.Fields(replace)
 		//fmt.Println(array1[1])
 
-		err := fmt.Errorf("exist error: %v", array1[1])
-		fmt.Println(err.Error())
-		return "", err
+		err := fmt.Errorf("exist error: %v", array1[0])
+		if err == nil {
+			fmt.Println(err.Error())
+			return "", err
+		}
+		//return "", err
 
 	}
 	if charec1 == true {
@@ -105,40 +108,40 @@ func StringSum(input string) (output string, err error) {
 		return "", err
 	}
 
-	if Signmm == true && Res2count == 1 {
-		min := strings.Split(Res1, "-")
-		min1 := min[0]
-		min2 := min[1]
-		min1m, _ := strconv.Atoi(min1)
-		min2m, _ := strconv.Atoi(min2)
-		if min2m > min1m {
-			sumintm := min2m - min1m
+	// if Signmm == true && Res2count == 1 {
+	// 	min := strings.Split(Res1, "-")
+	// 	min1 := min[0]
+	// 	min2 := min[1]
+	// 	min1m, _ := strconv.Atoi(min1)
+	// 	min2m, _ := strconv.Atoi(min2)
+	// 	if min2m > min1m {
+	// 		sumintm := min2m - min1m
 
-			Result3 := strconv.Itoa(sumintm)
-			fmt.Println("-"+Result3, nil)
+	// 		Result3 := strconv.Itoa(sumintm)
+	// 		fmt.Println("-"+Result3, nil)
 
-		}
-		if min2m < min1m {
-			sumintm := min1m + min2m
+	// 	}
+	// 	if min2m < min1m {
+	// 		sumintm := min1m + min2m
 
-			Result3 := strconv.Itoa(sumintm)
-			fmt.Println("-"+Result3, nil)
+	// 		Result3 := strconv.Itoa(sumintm)
+	// 		fmt.Println("-"+Result3, nil)
 
-		}
+	// 	}
 
-		err := fmt.Errorf("sum minus is not correct: %w", errorNotTwoOperands)
-		if err != nil {
+	// 	err := fmt.Errorf("sum minus is not correct: %w", errorNotTwoOperands)
+	// 	if err != nil {
 
-			fmt.Println(err.Error())
-			return "", err
+	// 		fmt.Println(err.Error())
+	// 		return "", err
 
-			//fmt.Println(Result3)
-		}
+	// 		//fmt.Println(Result3)
+	// 	}
 
-		//fmt.Println("-"+Result3, nil)
-		//retirn "", err
+	// 	//fmt.Println("-"+Result3, nil)
+	// 	//retirn "", err
 
-	}
+	// }
 
 	//two minus
 	if Signmm == true && Res2count < 2 {
@@ -159,7 +162,14 @@ func StringSum(input string) (output string, err error) {
 		outputm := strconv.Itoa(sumintm)
 		//fmt.Printf("%s","-" + outputm)
 		err := fmt.Errorf("sum is not correct: %w", errorNotTwoOperands)
-		if err == nil {
+		//2022 13.07
+		mCh := strings.Contains("partsm[0]", "-")
+		if mCh == true {
+			summa := sint2m - sint1m
+			out2 := strconv.Itoa(summa)
+			return out2, nil
+		}
+		if err != nil {
 
 			return "", err
 		}
@@ -176,6 +186,7 @@ func StringSum(input string) (output string, err error) {
 		return "", err
 	}
 	//++1107.2022
+
 	if Res1count == 1 {
 
 		parts := strings.Split(input, "+")
@@ -220,6 +231,12 @@ func StringSum(input string) (output string, err error) {
 			fmt.Println(nil, err.Error())
 			fmt.Println(one, two)
 			return "", err
+		}
+		mCh := strings.Contains("newinput[0]", "-")
+		if mCh == true {
+			summa := one + two
+			out2 := strconv.Itoa(summa)
+			return out2, nil
 		}
 
 		//for i := 0, i < len(newinput), i++ {
